@@ -1,8 +1,9 @@
 #!/bin/bash
 BASH_ENV=$HOME/.profile
-LOG_FILE=/usr/local/var/grive.log
+LOG_FILE=/opt/var/grive.log
 DOCKER_CONTAINER_NAME=grive
-GOOGLE_DRIVE=$HOME/GoogleDrive
+DOCKER_IMAGE_NAME=mygrive
+GOOGLE_DRIVE=$HOME/Volumes/GoogleDrive
 
 trap "echo Exiting" EXIT
 shopt -s expand_aliases
@@ -11,7 +12,7 @@ source $BASH_ENV
 pid=$$
 
 function container_create {
-	docker run -d --name $DOCKER_CONTAINER_NAME --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive $DOCKER_CONTAINER_NAME
+  docker run -d --rm --name $DOCKER_CONTAINER_NAME --platform=linux/amd64 --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive $DOCKER_IMAGE_NAME
 }
 
 function main {
@@ -40,7 +41,7 @@ function main {
 }
 
 echo GOOGLE_DRIVE=$GOOGLE_DRIVE
-
+touch LOG_FILE
 if [ -z "$1" ]
 then
   echo "No parameter provided"

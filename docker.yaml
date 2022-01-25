@@ -117,6 +117,12 @@ provision:
       /usr/bin/systemctl --user daemon-reload
       /usr/bin/systemctl --user restart docker.service
       gcloud auth configure-docker --quiet
+      
+  - mode: system
+    script: |
+      #!/bin/bash
+      systemctl start containerd
+      nerdctl run --privileged --rm tonistiigi/binfmt --install all
 
 probes:
  # Only `readiness` probes are supported right now.

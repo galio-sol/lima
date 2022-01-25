@@ -8,11 +8,16 @@ limactl start ~/projects/lima/docker.yaml
 # add alias docker="limactl shell docker docker" to ~/.profile
 
 ## build the image for grive
-docker build --tag mygrive ~/projects/lima/grive
+export DOCKER_IMAGE_NAME=mygrive
+
+docker build --platform=linux/amd64 --tag $DOCKER_IMAGE_NAME ~/projects/lima/grive
 
 ## initial setup
-# edit the file ~/.lima/docker/lima.yaml and allow write on home dir
-docker run -it rm --name $DOCKER_CONTAINER --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive mygrive grive -a
+# edit the file ~/.lima/docker/lima.yaml and allow write on ~/Volumes
+export GOOGLE_DRIVE=~/Volumes/GooogleDrive
+export DOCKER_CONTAINER=grive
+ 
+docker run -it --rm --name $DOCKER_CONTAINER --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive $DOCKER_IMAGE_NAME grive -a
 
 ## subsequent runs
 
