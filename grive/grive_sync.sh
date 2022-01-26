@@ -1,18 +1,17 @@
 #!/bin/bash
-BASH_ENV=$HOME/.profile
 LOG_FILE=/opt/var/grive.log
 DOCKER_CONTAINER_NAME=grive
 DOCKER_IMAGE_NAME=mygrive
 GOOGLE_DRIVE=$HOME/Volumes/GoogleDrive
-
+docker="/opt/homebrew/bin/limactl shell docker docker"
 trap "echo Exiting" EXIT
-shopt -s expand_aliases
-source $BASH_ENV
 
 pid=$$
 
 function container_create {
-  docker run -d --rm --name $DOCKER_CONTAINER_NAME --platform=linux/amd64 --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive $DOCKER_IMAGE_NAME
+  CONTAINER_CREATE_CMD="${docker} run -d --name ${DOCKER_CONTAINER_NAME} --platform=linux/amd64 --mount type=bind,source=${GOOGLE_DRIVE},target=/home/grive -w /home/grive ${DOCKER_IMAGE_NAME}"
+
+  eval $CONTAINER_CREATE_CMD
 }
 
 function main {
@@ -26,22 +25,26 @@ function main {
 	fi
 	
 	echo ${pid}::DOCKER_HOST::$DOCKER_HOST
-	CONTAINER_ID="$(docker ps -qa -f name=${DOCKER_CONTAINER_NAME})"
+  CONTAINER_ID_CMD="${docker} ps -qa -f name=${DOCKER_CONTAINER_NAME}"
+  CONTAINER_ID=$(eval $CONTAINER_ID_CMD)
 	
+  CONTAINER_RUNNING_CMD="${docker} container inspect ${CONTAINER_ID} -f {{.State.Running}}"
 	if [ "$CONTAINER_ID" = "" ]
 	then
+    echo "Creating container"
 		container_create
-	elif [ "$(docker container inspect ${CONTAINER_ID} -f {{.State.Running}})" = "true" ]
+	elif [ "$(eval ${CONTAINER_RUNNING_CMD})" = "true" ]
 	then
 		echo ${pid}"::Container ${CONTAINER_ID} is already running, exiting ..."
 	else
 		echo ${pid}::"Starting container"
-		docker start $CONTAINER_ID
+    CONTAINER_START_CMD="${docker} start ${CONTAINER_ID}"
+		eval $CONTAINER_START_CMD
 	fi
 }
 
 echo GOOGLE_DRIVE=$GOOGLE_DRIVE
-touch LOG_FILE
+touch $LOG_FILE
 if [ -z "$1" ]
 then
   echo "No parameter provided"

@@ -14,13 +14,12 @@ docker build --platform=linux/amd64 --tag $DOCKER_IMAGE_NAME ~/projects/lima/gri
 
 ## initial setup
 ### edit the file ~/.lima/docker/lima.yaml and allow write on ~/Volumes
-export GOOGLE_DRIVE=~/Volumes/GooogleDrive
+export GOOGLE_DRIVE=~/Volumes/GoogleDrive
 export DOCKER_CONTAINER=grive
  
-docker run -it --rm --name $DOCKER_CONTAINER --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive $DOCKER_IMAGE_NAME grive -a
+docker run -it --name $DOCKER_CONTAINER --platform=linux/amd64 --mount type=bind,source=$GOOGLE_DRIVE,target=/home/grive -w /home/grive DOCKER_IMAGE_NAME grive -a
 
 ## subsequent runs
-
 . ~/projects/lima/grive/grive_sync.sh
 
 # view logs
