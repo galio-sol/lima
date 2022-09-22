@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Disabled</key>
+    <false/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/opt/homebrew/bin</string>
+    </dict>
+    <key>WatchPaths</key>
+    <array>
+        <!-- <string>/Users/I327776/Volumes/GoogleDrive/</string> -->
+        <string>/Users/I327776/Volumes/GoogleDrive/!Asociatie/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/!tmp/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Apps/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Audit IT/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/B130NSC/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/CV/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Comentarii/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/DHL/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Garantii/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Haimovici/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/KPMG/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Materiale curs audit/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Oferte/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Poze/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Proceduri/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Socrate/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/TDD/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/TTS/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/Temp/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/_Declaratii/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/_Galio/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/_Personal/</string>
+        <string>/Users/I327776/Volumes/GoogleDrive/_SAP_OW/</string>
+    </array>
+    <key>Label</key>
+    <string>com.gt.grive</string>
+    <key>Program</key>
+    <string>/Users/I327776/projects/lima/grive/grive_sync.sh</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>launchd</string>
+    </array>
+    <key>StandardOutPath</key>
+    <string>/tmp/grive.stdout</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/grive.stderr</string>
+    <!-- <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+    </array> -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Second</key>
+            <integer>0</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+            <key>Hour</key>
+            <integer>10</integer>
+        </dict>
+        <dict>
+            <key>Second</key>
+            <integer>0</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+            <key>Hour</key>
+            <integer>12</integer>
+        </dict>
+        <dict>
+            <key>Second</key>
+            <integer>0</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+            <key>Hour</key>
+            <integer>14</integer>
+        </dict>
+        <dict>
+            <key>Second</key>
+            <integer>0</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+            <key>Hour</key>
+            <integer>16</integer>
+        </dict>
+    </array>
+</dict>
+</plist>
